@@ -1,0 +1,11 @@
+*{
+    margin: 0; padding: 0
+}
+html, body{
+    overflow: hidden;
+}
+.webgl{
+    position: fixed; left: 0; top: 0;
+    /* os에 따라 다름 */
+    outline: none;
+}
