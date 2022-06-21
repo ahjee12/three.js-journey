@@ -39,7 +39,7 @@ debugObject.reset = () => {
     // remove mesh
     scene.remove(object.mesh);
 
-    // empty the array - splice: remove or replace/ pop
+    // array 비우기 - splice: remove or replace/ pop
     objectsToUpdate.splice(0, objectsToUpdate.length);
   }
 };
@@ -270,7 +270,7 @@ const createSphere = (radius, position) => {
     material: defaultMaterial,
   });
   body.position.copy(position);
-  // physics body에 collide 이벤트 
+  // physics body에 collide 이벤트
   body.addEventListener("collide", playHitSound);
   world.addBody(body);
 

@@ -2,7 +2,6 @@ import "./style.css";
 import * as THREE from "three";
 import * as dat from "lil-gui";
 import gsap from "gsap";
-import { generateUUID } from "three/src/math/mathutils";
 console.log(gsap);
 
 /**
@@ -214,6 +213,7 @@ const tick = () => {
 
   // ※ camera.position바꾸면 이전 position 설정 값을 덮음 -> cameraGroup 위치 바꾸기
   // 마우스 움직임의 반만 움직이기, easing, 화면 크기에 따라 easing 안될 수도 -> deltaTime
+  // cameraGroup 값이 0이 될 때까지 frame반복
   const parallaxX = cursor.x * 0.5;
   const parallaxY = -cursor.y * 0.5;
   // console.log(parallaxX, cameraGroup.position.x);

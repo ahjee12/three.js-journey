@@ -49,6 +49,7 @@ const experience = new Experience(document.querySelector("canvas.webgl"));
 
 // /**
 //  * Environment map
+//  * Mesh만들기 전에 scene에 적용해야 함
 //  */
 // const environmentMap = cubeTextureLoader.load([
 //     '/textures/environmentMap/px.jpg',
@@ -129,6 +130,11 @@ const experience = new Experience(document.querySelector("canvas.webgl"));
 // gui.add(directionalLight.position, 'y').min(- 5).max(5).step(0.001).name('lightY')
 // gui.add(directionalLight.position, 'z').min(- 5).max(5).step(0.001).name('lightZ')
 
+// gui.add(directionalLight, 'intensity').min(0).max(10).step(0.001).name('lightIntensity')
+// gui.add(directionalLight.position, 'x').min(- 5).max(5).step(0.001).name('lightX')
+// gui.add(directionalLight.position, 'y').min(- 5).max(5).step(0.001).name('lightY')
+// gui.add(directionalLight.position, 'z').min(- 5).max(5).step(0.001).name('lightZ')
+
 // /**
 //  * Sizes
 //  */
@@ -181,7 +187,7 @@ const experience = new Experience(document.querySelector("canvas.webgl"));
 // renderer.setSize(sizes.width, sizes.height)
 // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-// /**
+// /**renderer
 //  * Animate
 //  */
 // const clock = new THREE.Clock()
