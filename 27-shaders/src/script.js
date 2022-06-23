@@ -22,6 +22,7 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const flagTexture = textureLoader.load("/textures/sKorea.jpg");
 
 /**
  * Test mesh
@@ -35,21 +36,39 @@ console.log(geometry);
 // for (let i = 0; i < count; i++) {
 //   randoms[i] = Math.random();
 // }
-// vertex.glsl에서 만든 변수 setting
+// vertex.glsl에서 만든 변수 setting (fragment로 바로 attribute를 가져갈 수 없음)
 // geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 1));
 
-// Material Meshbasic -> RawShader
-const material = new THREE.RawShaderMaterial({
+// Material Meshbasic -> RawShaderMaterial -> ShaderMaterial
+// -> vertex, fragment파일에서 uniforms 속성, varying 제외 변수 제거
+const material = new THREE.ShaderMaterial({
   vertexShader: testVertexShader,
   fragmentShader: testFragmentShader,
   uniforms: {
     uFrequency: { value: new THREE.Vector2(10, 5) },
+    uTime: { value: 0 },
+    uColor: { value: new THREE.Color("orange") },
+    uTexture: { value: flagTexture },
   },
   //   transparent: true,
 });
 
+gui
+  .add(material.uniforms.uFrequency.value, "x")
+  .min(0)
+  .max(20)
+  .step(0.01)
+  .name("frequencyX");
+gui
+  .add(material.uniforms.uFrequency.value, "y")
+  .min(0)
+  .max(20)
+  .step(0.01)
+  .name("frequencyY");
+
 // Mesh
 const mesh = new THREE.Mesh(geometry, material);
+mesh.scale.y = 2 / 3;
 scene.add(mesh);
 
 /**
@@ -107,6 +126,9 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  // Update material
+  material.uniforms.uTime.value = elapsedTime;
 
   // Update controls
   controls.update();
